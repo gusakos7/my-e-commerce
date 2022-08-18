@@ -8,6 +8,8 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -31,7 +33,7 @@ const googleProvider = new GoogleAuthProvider();
 //// googleProvider.setCustomParameters({
 //  //   prompt:'select_account'
 // //})
-export const signInWithGoogle = async () =>
+export const signInWithGooglePopup = async () =>
   signInWithPopup(auth, googleProvider);
 
 // * --------> EMAIL-PASSWORD <-------- * \\
@@ -59,7 +61,6 @@ export const createUserDocument = async (
   //   createdAt: new Date(),
   // });
   const userSnapshot = await getDoc(userRef);
-  console.log(userSnapshot);
 
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
@@ -79,8 +80,9 @@ export const createUserDocument = async (
   }
 
   return userSnapshot;
-
-  //if user data exists -> return userRef
-  //if user data !exists
-  //create-set the document with the data from userAuth in my collection
 };
+
+export const signOutUser = () => signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
