@@ -18,7 +18,7 @@ const Navigation = () => {
       const res = await signOutUser();
       console.log(res);
     } catch (error) {
-      console.log("erron during sign out", error);
+      console.log("error during sign out", error);
     }
   };
 
