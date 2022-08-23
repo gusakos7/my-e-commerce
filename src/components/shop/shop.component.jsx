@@ -3,19 +3,12 @@ import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import CategoriesPreview from "../../routes/categories-preview/categories-preview.component";
 import Category from "../../routes/category/category.component";
-import {
-  fetchCategories,
-  setCategories,
-} from "../../store/categories/categoriesSlice";
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-
-import "./shop.styles.scss";
+import { fetchCategories } from "../../store/categories/categoriesSlice";
 
 const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // console.log(fetchCategories());
     dispatch(fetchCategories());
   }, []);
 

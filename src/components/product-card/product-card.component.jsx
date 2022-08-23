@@ -2,26 +2,30 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/cart/cartSlice";
 import Button from "../button/button.component";
 
-import "./product-card.styles.scss";
+import {
+  ProductCardContainer,
+  Footer,
+  Name,
+  Price,
+} from "./product-card.styles.jsx";
 
 const ProductCard = ({ product }) => {
   const { imageUrl, name, price } = product;
-  // const { addItemToCart } = useContext(CartContext);
   const dispatch = useDispatch();
 
   const addProductToCart = () => dispatch(addItemToCart(product));
 
   return (
-    <div className="product-card-container">
+    <ProductCardContainer>
       <img src={imageUrl} alt={name} />
-      <div className="footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
+      <Footer>
+        <Name>{name}</Name>
+        <Price>{price}&euro;</Price>
+      </Footer>
       <Button onClick={addProductToCart} buttonType="inverted">
         Add to cart
       </Button>
-    </div>
+    </ProductCardContainer>
   );
 };
 

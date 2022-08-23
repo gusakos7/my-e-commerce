@@ -5,7 +5,15 @@ import {
   removeItemFromCart,
 } from "../../store/cart/cartSlice";
 
-import "./checkout-item.styles.scss";
+import {
+  BaseSpan,
+  CheckoutItemContainer,
+  ImageContainer,
+  Quantity,
+  Arrow,
+  Value,
+  RemoveButton,
+} from "./checkout-item.styles.jsx";
 
 const CheckoutItem = ({ product }) => {
   const { name, price, quantity, imageUrl } = product;
@@ -14,26 +22,21 @@ const CheckoutItem = ({ product }) => {
   const increaseHandler = () => dispatch(addItemToCart(product));
   const decreaseHandler = () => dispatch(removeItemFromCart(product));
   const clearItemHandler = () => dispatch(clearItemFromCart(product));
+
   return (
-    <div className="checkout-item-container">
-      <div className="image-container">
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt={name} />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div className="arrow" onClick={increaseHandler}>
-          &#10094;
-        </div>
-        <span className="value">{quantity}</span>
-        <div onClick={decreaseHandler} className="arrow">
-          &#10095;
-        </div>
-      </span>
-      <span className="price">{price}&euro;</span>
-      <div onClick={clearItemHandler} className="remove-button">
-        &#10005;
-      </div>
-    </div>
+      </ImageContainer>
+      <BaseSpan>{name}</BaseSpan>
+      <Quantity>
+        <Arrow onClick={increaseHandler}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={decreaseHandler}>&#10095;</Arrow>
+      </Quantity>
+      <BaseSpan>{price}&euro;</BaseSpan>
+      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 

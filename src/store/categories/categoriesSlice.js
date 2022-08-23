@@ -5,7 +5,6 @@ export const fetchCategories = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
     try {
-      console.log("KOOOOOOOOOOTA");
       const categoriesArray = await getCategoriesAndDocuments();
       return categoriesArray;
     } catch (error) {
