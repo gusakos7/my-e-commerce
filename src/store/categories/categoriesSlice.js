@@ -8,20 +8,10 @@ export const fetchCategories = createAsyncThunk(
       const categoriesArray = await getCategoriesAndDocuments();
       return categoriesArray;
     } catch (error) {
-      // thunkApi.rejectWithValue(
-      //   `an error occured while fetching categories: ${error}`
-      // );
-      console.log(`an error occured while fetching categories: ${error}`);
+      console.log(`an error occurred while fetching categories: ${error}`);
     }
   }
 );
-
-// async function getCategories() {
-//   const categoriesArray = await getCategoriesAndDocuments();
-//   dispatch(setCategories(categoriesArray));
-// }
-
-// getCategories();
 
 const initialState = {
   categories: [],
