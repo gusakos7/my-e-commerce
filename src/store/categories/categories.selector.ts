@@ -1,6 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+import { CategoryMap } from "./categories.types";
+import { CategoriesState } from "./categoriesSlice";
 
-const selectCategoriesReducer = (state) => state.categories;
+const selectCategoriesReducer = (state: RootState): CategoriesState =>
+  state.categories;
 
 export const selectCategories = createSelector(
   [selectCategoriesReducer],
@@ -9,12 +13,12 @@ export const selectCategories = createSelector(
 
 export const selectCategoriesMap = createSelector(
   [selectCategories],
-  (categories) => {
+  (categories): CategoryMap => {
     return categories.reduce((acc, category) => {
       const { title, items } = category;
       acc[title.toLowerCase()] = items;
       return acc;
-    }, {});
+    }, {} as CategoryMap);
   }
 );
 
