@@ -1,13 +1,19 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ReactComponent as CrownSVG } from "../../assets/crown.svg";
 
-import "./navigation.styles.scss";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 import { signOutUserAuth } from "../../store/user/userSlice";
+
+import {
+  NavLink,
+  NavLinksContainer,
+  NavigationContainer,
+  LogoContainer,
+} from "./navigation.styles.jsx";
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -20,29 +26,29 @@ const Navigation = () => {
 
   return (
     <>
-      <div className="navigation-container">
-        <div className="logo-container">
-          <Link to="/" className="nav-link">
+      <NavigationContainer>
+        <LogoContainer>
+          <NavLink to="/" className="nav-link">
             <CrownSVG className="logo" />
-          </Link>
-        </div>
-        <div className="nav-links-container">
-          <Link to="/shop" className="nav-link">
+          </NavLink>
+        </LogoContainer>
+        <NavLinksContainer>
+          <NavLink to="/shop" className="nav-link">
             Shop
-          </Link>
+          </NavLink>
           {currentUser ? (
-            <span onClick={signOutHandler} className="nav-link">
+            <NavLink onClick={signOutHandler} className="nav-link">
               Sign Out
-            </span>
+            </NavLink>
           ) : (
-            <Link to="/auth" className="nav-link">
+            <NavLink to="/auth" className="nav-link">
               Sign in
-            </Link>
+            </NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinksContainer>
         {isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   );
